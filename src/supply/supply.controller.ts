@@ -52,4 +52,15 @@ export class SupplyController {
       throw new HttpException(err?.code ?? err?.name ?? `${err}`, 400);
     }
   }
+
+  @Get('/most-needed')
+  async most_needed() {
+    try {
+      const data = await this.supplyServices.most_needed();
+      return new ServerResponse(200, 'Successfully get supplies', data);
+    } catch (err: any) {
+      this.logger.error(`Failed to get supplies: ${err}`);
+      throw new HttpException(err?.code ?? err?.name ?? `${err}`, 400);
+    }
+  }
 }
